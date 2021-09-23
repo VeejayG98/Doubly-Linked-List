@@ -248,6 +248,22 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
             temp = next;
         }
     }
+
+    public void insertList(MyLinkedList<AnyType> lst2, int idx){
+
+        if((idx < 0) || (idx > size() -1))
+            throw new IndexOutOfBoundsException("getNode index: " + idx + "; size: " + size());
+        
+        Node<AnyType> temp = getNode(idx);
+        temp.prev.next = lst2.beginMarker.next;
+        lst2.beginMarker.next.prev = temp.prev;
+
+        lst2.endMarker.prev.next = temp;
+        temp.prev = lst2.endMarker.prev;
+
+        theSize += lst2.size();
+
+    }
     /**
      * Obtains an Iterator object used to traverse the collection.
      * @return an iterator positioned prior to the first element.
@@ -346,8 +362,16 @@ class TestLinkedList
         // lst.swapNodes(0, 1);
         // System.out.println(lst);
         // lst.test();
-        lst.erase(0, 6);
+        // lst.erase(0, 6);
+
+        MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
+        for( int i = 7; i <= 9; i++ )
+            lst2.add( i );
+        System.out.println(lst2);
+
+        lst.insertList(lst2, 0);
         System.out.println(lst);
+        lst.test();
         // for( int i = 20; i < 30; i++ )
         //     lst.add( 0, i );
         
