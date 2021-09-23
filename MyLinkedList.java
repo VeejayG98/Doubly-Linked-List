@@ -235,6 +235,19 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         temp2.next = endMarker;
         endMarker.prev = temp2;
     }
+
+    public void erase(int idx, int n){
+        Node<AnyType> temp = getNode(idx);
+        if ((idx < 0) || (idx + n > size())){
+            throw new IndexOutOfBoundsException("getNode index: " + idx + "; size: " + size( ) + "; n: " + n);
+        }
+
+        for(int i = 1; i <=n; i++){
+            Node<AnyType> next = temp.next;
+            remove(temp);
+            temp = next;
+        }
+    }
     /**
      * Obtains an Iterator object used to traverse the collection.
      * @return an iterator positioned prior to the first element.
@@ -328,11 +341,13 @@ class TestLinkedList
 
         System.out.println(lst);
 
-        lst.shiftNodes(-3);
-        System.out.println(lst);
+        // lst.shiftNodes(-3);
+        // System.out.println(lst);
         // lst.swapNodes(0, 1);
         // System.out.println(lst);
-        lst.test();
+        // lst.test();
+        lst.erase(0, 6);
+        System.out.println(lst);
         // for( int i = 20; i < 30; i++ )
         //     lst.add( 0, i );
         
