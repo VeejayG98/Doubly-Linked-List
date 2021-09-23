@@ -205,6 +205,36 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         
     }
     
+    public void shiftNodes(int n){
+        
+        if (n < 0){
+            n = -n;
+            n = n % size();
+            n = -(n - 5);
+        }
+        else
+            n = n % size();
+
+        if (n == 0)
+        return;
+
+        Node<AnyType> temp1, beg = beginMarker.next;
+        temp1 = beg = beginMarker.next;
+
+        for(int i=1; i<=n; i++)
+            beg = beg.next;
+
+        Node<AnyType> temp2 = beg.prev;
+        beg.prev = beginMarker;
+        beginMarker.next = beg;
+
+        Node<AnyType> end = endMarker.prev;
+        end.next = temp1;
+        temp1.prev = end;
+
+        temp2.next = endMarker;
+        endMarker.prev = temp2;
+    }
     /**
      * Obtains an Iterator object used to traverse the collection.
      * @return an iterator positioned prior to the first element.
@@ -293,13 +323,15 @@ class TestLinkedList
     {
         MyLinkedList<Integer> lst = new MyLinkedList<Integer>( );
         
-        for( int i = 1; i <= 6; i++ )
+        for( int i = 1; i <= 5; i++ )
             lst.add( i );
 
         System.out.println(lst);
 
-        lst.swapNodes(0, 1);
+        lst.shiftNodes(-3);
         System.out.println(lst);
+        // lst.swapNodes(0, 1);
+        // System.out.println(lst);
         lst.test();
         // for( int i = 20; i < 30; i++ )
         //     lst.add( 0, i );
