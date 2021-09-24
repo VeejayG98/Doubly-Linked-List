@@ -357,21 +357,21 @@ class TestLinkedList
 
         System.out.println(lst);
 
-        // lst.shiftNodes(-3);
+        lst.shiftNodes(-3);
+        System.out.println(lst);
+        // lst.swapNodes(3, 0);
         // System.out.println(lst);
-        // lst.swapNodes(0, 1);
-        // System.out.println(lst);
-        // lst.test();
+        lst.test();
         // lst.erase(0, 6);
 
-        MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
-        for( int i = 7; i <= 9; i++ )
-            lst2.add( i );
-        System.out.println(lst2);
+        // MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
+        // for( int i = 7; i <= 9; i++ )
+        //     lst2.add( i );
+        // System.out.println(lst2);
 
-        lst.insertList(lst2, 0);
-        System.out.println(lst);
-        lst.test();
+        // lst.insertList(lst2, 0);
+        // System.out.println(lst);
+        // lst.test();
         // for( int i = 20; i < 30; i++ )
         //     lst.add( 0, i );
         
