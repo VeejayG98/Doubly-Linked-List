@@ -3,23 +3,21 @@ import java.util.ArrayList;
 public class MyStack<AnyType> {
 
     private int top = -1;
-    private int size;
 
     ArrayList<AnyType> stack = new ArrayList<AnyType>();
 
     public int getSize(){
-        return size;
+        return top + 1;
     }
     
     public void push(AnyType x){
         stack.add(x);
         top ++;
-        size ++;
     }
 
     private boolean isEmpty(){
         
-        return (size == 0);
+        return (getSize() == 0);
     }
 
     public AnyType pop(){
@@ -32,42 +30,48 @@ public class MyStack<AnyType> {
         AnyType x = stack.get(top);
         stack.remove(top);
         top --;
-        size --;
         return x;
     }
 
     public static void main(String[] args) {
-        String[] a = {"{","}"};
+
+        // Creating the expression using a String array
+        String[] a = {"[","(","{","}","{","}",")","]"};
         MyStack<String> stack = new MyStack<>();
+
         for(int i = 0; i < a.length; i++){
+            // Checking if the symbol is an opening symbol
             if (a[i] == "[" || a[i] =="(" || a[i] == "{")
                 stack.push(a[i]);
             
+        // Checking if the closing symbol matches the opening symbol or if we are pushing a closing symbol into an empty stack
+
             else if (a[i] == "}" && (stack.isEmpty() || stack.pop() != "{")){
-                System.out.println("Invalid expression");
+                System.out.println("Symbols are not balanced");
                 return;
             }
 
             else if (a[i] == ")" && (stack.isEmpty() || stack.pop() != "(")){
-                System.out.println("Invalid expression");
+                System.out.println("Symbols are not balanced");
                 return;
             
             }
 
             else if (a[i] == "]" && (stack.isEmpty() || stack.pop() != "[")){
-                System.out.println("Invalid expression");
+                System.out.println("Symbols are not balanced");
                 return;
             
             }
         }
 
+        // To check if there are any open symbols still present in the stack
         if (stack.getSize() != 0){
-            System.out.println("Invalid expression");
+            System.out.println("Symbols are not balanced");
             return;
         }
 
         else{
-            System.out.println("The expression is valid!");
+            System.out.println("Symbols are balanced");
         }
         
     }
