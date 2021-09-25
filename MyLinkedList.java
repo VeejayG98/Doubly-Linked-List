@@ -240,7 +240,9 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
     }
 
     public void erase(int idx, int n){
+
         Node<AnyType> temp = getNode(idx);
+        
         if ((idx < 0) || (idx + n > size())){
             throw new IndexOutOfBoundsException("getNode index: " + idx + "; size: " + size( ) + "; n: " + n);
         }
