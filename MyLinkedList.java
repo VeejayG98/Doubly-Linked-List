@@ -256,6 +256,7 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
         if((idx < 0) || (idx > size()))
             throw new IndexOutOfBoundsException("getNode index: " + idx + "; size: " + size());
         
+        // Inserting to the end of the list
         else if (idx == size())
             temp = endMarker;
 
