@@ -361,29 +361,35 @@ class TestLinkedList
     {
         MyLinkedList<Integer> lst = new MyLinkedList<Integer>( );
         
+        // Adding elements into linked list lst
         for( int i = 1; i <= 5; i++ )
             lst.add( i );
 
         System.out.println(lst);
 
+        // Using the swapNodes method
         lst.swapNodes(3, 0);
         System.out.println(lst);
         // lst.TestConnections() checks if all the node links are correct by printing all forward links and all backward links
         lst.testConnections();
 
+        // Using the shiftNodes method
         lst.shiftNodes(-3);
         System.out.println(lst);
         lst.testConnections();
 
+        // Using the erase method
         lst.erase(2, 2);
         System.out.println(lst);
         lst.testConnections();
 
+        // Making a new linked list lst2 and adding elements to it
         MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
         for( int i = 7; i <= 9; i++ )
             lst2.add( i );
         System.out.println(lst2);
 
+        // Using the insertList method to insert linked list lst2 into linked list lst
         lst.insertList(lst2, 0);
         System.out.println(lst);
         lst.testConnections();
