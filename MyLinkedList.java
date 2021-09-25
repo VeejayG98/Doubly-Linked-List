@@ -251,10 +251,17 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
 
     public void insertList(MyLinkedList<AnyType> lst2, int idx){
 
-        if((idx < 0) || (idx > size() -1))
+        Node<AnyType> temp;
+
+        if((idx < 0) || (idx > size()))
             throw new IndexOutOfBoundsException("getNode index: " + idx + "; size: " + size());
         
-        Node<AnyType> temp = getNode(idx);
+        else if (idx == size())
+            temp = endMarker;
+
+        else
+            temp = getNode(idx);
+        
         temp.prev.next = lst2.beginMarker.next;
         lst2.beginMarker.next.prev = temp.prev;
 
@@ -328,21 +335,23 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
     private Node<AnyType> beginMarker;
     private Node<AnyType> endMarker;
 
-    public void test(){
+    public void testConnections(){
 
         System.out.println("Forward Pass");
         Node<AnyType> temp = getNode(0);
         for(int i = 1; i <= size(); i++){
-            System.out.println(temp.data);
+            System.out.print(temp.data + "->");
             temp = temp.next;
         }
+        System.out.print("END \n");
 
         System.out.println("Backward Pass");
         temp = getNode(size() - 1);
         for(int i = 1; i <= size(); i++){
-            System.out.println(temp.data);
+            System.out.print(temp.data + "->");
             temp = temp.prev;
         }
+        System.out.print("BEGINNING \n");
     }
 }
 
@@ -357,35 +366,27 @@ class TestLinkedList
 
         System.out.println(lst);
 
+        lst.swapNodes(3, 0);
+        System.out.println(lst);
+        // lst.TestConnections() checks if all the node links are correct by printing all forward links and all backward links
+        lst.testConnections();
+
         lst.shiftNodes(-3);
         System.out.println(lst);
-        // lst.swapNodes(3, 0);
-        // System.out.println(lst);
-        lst.test();
-        // lst.erase(0, 6);
+        lst.testConnections();
 
-        // MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
-        // for( int i = 7; i <= 9; i++ )
-        //     lst2.add( i );
-        // System.out.println(lst2);
+        lst.erase(2, 2);
+        System.out.println(lst);
+        lst.testConnections();
 
-        // lst.insertList(lst2, 0);
-        // System.out.println(lst);
-        // lst.test();
-        // for( int i = 20; i < 30; i++ )
-        //     lst.add( 0, i );
+        MyLinkedList<Integer> lst2 = new MyLinkedList<>( );
+        for( int i = 7; i <= 9; i++ )
+            lst2.add( i );
+        System.out.println(lst2);
+
+        lst.insertList(lst2, 0);
+        System.out.println(lst);
+        lst.testConnections();
         
-        // lst.remove( 0 );
-        // lst.remove( lst.size( ) - 1 );
-        
-        // System.out.println( lst );
-        
-        // java.util.Iterator<Integer> itr = lst.iterator( );
-        // while( itr.hasNext( ) )
-        // {
-        //     itr.next( );
-        //     itr.remove( );
-        //     System.out.println( lst );
-        // }
     }
 }
