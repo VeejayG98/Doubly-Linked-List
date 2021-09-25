@@ -185,6 +185,9 @@ public class MyLinkedList<AnyType> implements Iterable<AnyType>
 
     public void swapNodes(int idx1, int idx2){
         
+        if (idx1 < 0 || idx1 >= size() || idx2 < 0 || idx2 >=size())
+            throw new IndexOutOfBoundsException("Index 1: " + idx1 + " Index 2: " + idx2 + " size: " + size());
+
         Node<AnyType> currX = getNode(idx1);
         Node<AnyType> currY = getNode(idx2);
         
@@ -369,7 +372,7 @@ class TestLinkedList
         System.out.println(lst);
 
         // Using the swapNodes method
-        lst.swapNodes(3, 0);
+        lst.swapNodes(2, 4);
         System.out.println(lst);
         // lst.TestConnections() checks if all the node links are correct by printing all forward links and all backward links
         lst.testConnections();
